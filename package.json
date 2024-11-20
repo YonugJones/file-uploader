@@ -1,0 +1,28 @@
+{
+  "name": "file-uploader",
+  "version": "1.0.0",
+  "description": "Project: File Uploader via The Odin Project",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "YonugJones",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@quixo3/prisma-session-store": "^3.1.13",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}
