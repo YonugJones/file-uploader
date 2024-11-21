@@ -6,6 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(
   expressSession({
     cookie: {
@@ -30,7 +31,7 @@ app,use(passport.expressSession());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
