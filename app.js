@@ -3,7 +3,7 @@ const expressSession = require('express-session');
 const path = require('node:path');
 const passport = require('./middlewares/passport');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
-const { PrismaClient } = require('@prisma/client');
+const prisma = require('./db/prisma');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 
@@ -24,7 +24,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(
-      new PrismaClient(),
+      prisma,
       {
         checkPeriod: 2 * 60 * 1000,  //ms
         dbRecordIdIsSessionId: true,
