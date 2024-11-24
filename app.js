@@ -1,5 +1,5 @@
 const express = require('express');
-const expressSession = require('express-session');
+const session = require('express-session');
 const path = require('node:path');
 const passport = require('./middlewares/passport');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
-  expressSession({
+  session({
     cookie: {
      maxAge: 7 * 24 * 60 * 60 * 1000 // ms
     },

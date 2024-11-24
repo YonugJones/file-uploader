@@ -30,7 +30,32 @@ exports.postSignup = async (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
-  req.logout();
-  res.redirect('/auth/login');
+exports.logout = async (req, res, next) => {
+  try {
+    req.logout((err) => {
+      if (err) return next(err);
+      req.session.destroy((err) => {
+        if (err) return next(err);
+        res.clearCookie('connect.sid');
+        res.redirect('/auth/login');
+      })
+    })
+  } catch (err) {
+    next(err);
+  }
 }
+
+// exports.logout = async (req, res, next) => {
+//   try {
+//     await req.logout((err) => {
+//       if (err) {
+//         return next(err);
+//       }
+//       req.session()
+//     });
+//     res.redirect('/auth/login');
+//   } catch (err) {
+//     console.error('Logout Error:', err); 
+//     next(err);
+//   }
+// }
