@@ -1,5 +1,23 @@
 <h1>Welcome, <%= user ? user.email : 'Guest' %></h1>
 <% if (user) { %>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <h2>Upload a Single File</h2>
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
+  <form action="/uploads" method="POST" enctype="multipart/form-data">
+    <h2>Upload Multiple Files</h2>
+    <input type="file" name="files" multiple required>
+    <button type="submit">Upload</button>
+  </form>
+  <form action="/profile" method="POST" enctype="multipart/form-data">
+    <h2>Upload Avatar an Gallery</h2>
+    <label for="avatar">Avatar:</label>
+    <input type="file" name="avatar" required>
+    <label for="gallery">Gallery:</label>
+    <input type="file" name="gallery" multiple required>
+    <button type="submit">Upload</button>
+  </form>
   <a href="/auth/logout">Logout</a>
 <% } else { %>
   <a href="/auth/login">Login</a> | <a href="/auth/signup">Signup</a>;
