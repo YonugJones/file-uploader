@@ -20,3 +20,8 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
+
+model Folder {
+  id Int @id @default(autoincrement())
+  
+}

@@ -43,19 +43,4 @@ exports.logout = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
-
-// exports.logout = async (req, res, next) => {
-//   try {
-//     await req.logout((err) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       req.session()
-//     });
-//     res.redirect('/auth/login');
-//   } catch (err) {
-//     console.error('Logout Error:', err); 
-//     next(err);
-//   }
-// }
+};
