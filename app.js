@@ -6,6 +6,7 @@ const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const prisma = require('./db/prisma');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const folderRouter = require('./routes/folder');
 
 const app = express();
 
@@ -43,5 +44,6 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/folder', folderRouter);
 
 module.exports = app;

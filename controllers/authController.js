@@ -2,20 +2,20 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const prisma = require('../db/prisma');
 
-exports.getLogin = (req, res) => {
+const getLogin = (req, res) => {
   res.render('login');
 };
 
-exports.postLogin = passport.authenticate('local', {
+const postLogin = passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login'
 });
 
-exports.getSignup = (req, res) => {
+const getSignup = (req, res) => {
   res.render('signup');
 };
 
-exports.postSignup = async (req, res) => {
+const postSignup = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -30,7 +30,7 @@ exports.postSignup = async (req, res) => {
   }
 };
 
-exports.logout = async (req, res, next) => {
+const logout = async (req, res, next) => {
   try {
     req.logout((err) => {
       if (err) return next(err);
@@ -44,3 +44,11 @@ exports.logout = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = {
+  getLogin,
+  postLogin,
+  getSignup,
+  postSignup,
+  logout
+}

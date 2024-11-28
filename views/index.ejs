@@ -1,5 +1,10 @@
 <h1>Welcome, <%= user ? user.email : 'Guest' %></h1>
 <% if (user) { %>
+  <form action="/folder/create" method="POST">
+    <h2>Create a folder</h2>
+    <input type="text" name="name" placeholder="Folder Name" required>
+    <button type="submit">Create Folder</button>
+  </form>
   <form action="/upload" method="POST" enctype="multipart/form-data">
     <h2>Upload a file</h2>
     <input type="file" name="file" required>
