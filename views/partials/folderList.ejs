@@ -1,0 +1,9 @@
+<ul>
+  <% if (folders && folders.length > 0) { %>
+    <% folders.forEach(folder => { %>
+      <li><%= folder.name %></li>
+    <% }) %>
+  <% } else { %>
+    <p>No folders available. Create your first folder!</p>
+  <% } %>
+</ul>
