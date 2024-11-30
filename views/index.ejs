@@ -1,14 +1,14 @@
-<h1>Welcome, <%= user ? user.email : 'Guest' %></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>File Uploader</title>
+</head>
+<body>
 
-<% if (folders && folders.length > 0) { %>
-  <ul>
-    <% folders.forEach(folder => { %>
-      <li><%= folder.name %></li>
-    <% }) %>
-  </ul>
-<% } else { %>
-  <p>You have no folders. Create one below!</p>
-<% } %>
+<%- include('partials/header') %>
 
 <% if (user) { %>
   <form action="/folder/create" method="POST">
@@ -16,12 +16,20 @@
     <input type="text" name="name" placeholder="Folder Name" required>
     <button type="submit">Create Folder</button>
   </form>
-  <form action="/upload" method="POST" enctype="multipart/form-data">
-    <h2>Upload a file</h2>
-    <input type="file" name="file" required>
-    <button type="submit">Upload</button>
-  </form>
-  <a href="/auth/logout">Logout</a>
+
+<%- include('partials/folderList') %>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+  <h2>Upload a file</h2>
+  <input type="file" name="file" required>
+  <button type="submit">Upload</button>
+</form>
+
+<a href="/auth/logout">Logout</a>
 <% } else { %>
   <a href="/auth/login">Login</a> | <a href="/auth/signup">Signup</a>;
 <% } %>
+
+<%- include('partials/footer') %>
+</body>
+</html>
