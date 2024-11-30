@@ -1,4 +1,15 @@
 <h1>Welcome, <%= user ? user.email : 'Guest' %></h1>
+
+<% if (folders && folders.length > 0) { %>
+  <ul>
+    <% folders.forEach(folder => { %>
+      <li><%= folder.name %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>You have no folders. Create one below!</p>
+<% } %>
+
 <% if (user) { %>
   <form action="/folder/create" method="POST">
     <h2>Create a folder</h2>
