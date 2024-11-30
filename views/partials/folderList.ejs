@@ -1,7 +1,16 @@
 <% if (folders && folders.length > 0) { %>
   <ul>
     <% folders.forEach(folder => { %>
-      <li class="folder-button"><button><%= folder.name %></button></li>
+      <li class="folder-button">
+
+        <button><%= folder.name %></button>
+
+        <form action="/folder/delete" method="POST" style="display: inline;">
+          <input type="hidden" name="folderId" value="<%= folder.id %>">
+          <button type="submit">DELETE</button>
+        </form>
+
+      </li>
     <% }) %>
   </ul>
 <% } else { %>
