@@ -15,11 +15,6 @@ router.get('/', ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.post('/upload', singleUpload, (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('No file uploaded.')
-  }
-  res.send(`File uploaded successfully: ${req.file.filename}`);
-});
+router.post('/upload', ensureAuthenticated, singleUpload, folderController.uploadFile);
 
 module.exports = router;

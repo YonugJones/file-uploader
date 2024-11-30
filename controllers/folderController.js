@@ -64,8 +64,65 @@ const displayFolders = async (req) => {
   }
 };
 
+const getFolderFiles = async (req, res) => {
+  const { folderId } = req.params;
+
+  try {
+    const folder = await prisma.folder.findUnique({
+      where: { id: parseInt(folderId) },
+      include: { files: true },
+    });
+
+    if (!folder || folder.authorId !== req.user.id) {
+      return res.status(404).send('Folder not found or not accessible.');
+    }
+
+    res.render('folder', { folder, user: req.user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('An error occurred while fetching folder files.');
+  }
+};
+
+const uploadFile = async (req, res) => {
+  const { folderId } = req.body;
+
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+
+  if (!folderId) {
+    return res.status(400).send('Folder ID is required.');
+  }
+
+  try {
+    const folder = await prisma.folder.findUnique({
+      where: { id: parseInt(folderId) },
+    });
+
+    if (!folder || folder.authorId !== req.user.id) {
+      return res.status(404).send('Folder not found or not accessible.');
+    }
+
+    const file = await prisma.file.create({
+      data: {
+        name: req.file.filename,
+        folderId: parseInt(folderId),
+        authorId: req.user.id,
+      },
+    });
+
+    res.status(201).json({ message: 'File uploaded successfully', file });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('An error occurred while uploading the file.');
+  }
+};
+
 module.exports = {
   createFolder,
   displayFolders,
-  deleteFolder
+  deleteFolder,
+  getFolderFiles,
+  uploadFile
 };

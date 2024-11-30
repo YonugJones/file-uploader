@@ -21,11 +21,21 @@
   
   <%- include('partials/folderList') %>
   
-  <form action="/upload" method="POST" enctype="multipart/form-data">
-    <h2>Upload a file</h2>
-    <input type="file" name="file" required>
-    <button type="submit">Upload</button>
-  </form>
+  <% if (user) { %>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <h2>Upload a file</h2>
+      
+      <label for="folderSelect">Choose a folder:</label>
+      <select name="folderId" id="folderSelect" required>
+        <% folders.forEach(folder => { %>
+          <option value="<%= folder.id %>"><%= folder.name %></option>
+        <% }) %>
+      </select>
+  
+      <input type="file" name="file" required>
+      <button type="submit">Upload</button>
+    </form>
+  <% } %>
   
   <% } else { %>
     <a href="/auth/login">Login</a> | <a href="/auth/signup">Signup</a>;

@@ -22,19 +22,21 @@ model User {
   folders  Folder[]
 }
 
-model Folder {
-  id       Int    @id @default(autoincrement())
-  name     String
-  authorId Int
-  files    File[]
-  author   User   @relation(fields: [authorId], references: [id])
+model File {
+  id        Int      @id @default(autoincrement())
+  name      String
+  folder    Folder   @relation(fields: [folderId], references: [id])
+  folderId  Int
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
 }
 
-model File {
-  id       Int    @id @default(autoincrement())
-  name     String @unique
-  folderId Int
-  authorId Int
-  author   User   @relation(fields: [authorId], references: [id])
-  folder   Folder @relation(fields: [folderId], references: [id])
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  files     File[]
+  createdAt DateTime @default(now())
 }
