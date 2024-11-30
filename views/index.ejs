@@ -10,25 +10,28 @@
 
 <%- include('partials/header') %>
 
-<% if (user) { %>
-  <form action="/folder/create" method="POST">
-    <h2>Create a folder</h2>
-    <input type="text" name="name" placeholder="Folder Name" required>
-    <button type="submit">Create Folder</button>
+<div class="main-content">
+
+  <% if (user) { %>
+    <form action="/folder/create" method="POST">
+      <h2>Create a folder</h2>
+      <input type="text" name="name" placeholder="Folder Name" required>
+      <button type="submit">Create Folder</button>
+    </form>
+  
+  <%- include('partials/folderList') %>
+  
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <h2>Upload a file</h2>
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
   </form>
+  
+  <% } else { %>
+    <a href="/auth/login">Login</a> | <a href="/auth/signup">Signup</a>;
+  <% } %>
 
-<%- include('partials/folderList') %>
-
-<form action="/upload" method="POST" enctype="multipart/form-data">
-  <h2>Upload a file</h2>
-  <input type="file" name="file" required>
-  <button type="submit">Upload</button>
-</form>
-
-<a href="/auth/logout">Logout</a>
-<% } else { %>
-  <a href="/auth/login">Login</a> | <a href="/auth/signup">Signup</a>;
-<% } %>
+</div>
 
 <%- include('partials/footer') %>
 </body>
